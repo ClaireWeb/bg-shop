@@ -1,24 +1,32 @@
-import React from "react";
+import React from 'react'
+import PropTypes from 'prop-types'
 
-const GameCard = () => (
+const GameCard = ({ game }) => (
   <div className="ui card">
     <div className="image">
-      <span className="ui green ribbon label">$32.99</span>
-      <img
-        src="https://cf.geekdo-images.com/BMUcxCZM_AikQ7uXeuDg43RZIWo=/fit-in/246x300/pic2840020.jpg"
-        alt="Game cover"
-      />
+      <span className="ui green ribbon label">${game.price}</span>
+      <img src={game.thumbnail} alt="Game cover" />
     </div>
     <div className="content">
-      <a href="#" className="header">
-        Quadropolis
+      <a href="http://www.google.com" className="header">
+        {game.name}
       </a>
       <div className="meta">
-        <i className="icon users" /> 2-4&nbsp;
-        <i className="icon wait" /> 60 min.;
+        <i className="icon users" /> {game.players}&nbsp;
+        <i className="icon wait" /> {game.duration} min.
       </div>
     </div>
   </div>
-);
+)
 
-export default GameCard;
+GameCard.propTypes = {
+  game: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    thumbnail: PropTypes.string.isRequired,
+    players: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    duration: PropTypes.number.isRequired
+  }).isRequired
+}
+
+export default GameCard
