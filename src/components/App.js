@@ -1,12 +1,6 @@
 import React from 'react'
 import GamesList from './GamesList'
 
-const App = props => (
-  <div className="ui container">
-    <GamesList games={games} />
-  </div>
-)
-
 const games = [
   {
     _id: 1,
@@ -36,5 +30,23 @@ const games = [
     duration: 45
   }
 ]
+
+class App extends React.Component {
+  state = {
+    games: []
+  }
+
+  componentDidMount() {
+    this.setState({ games })
+  }
+
+  render() {
+    return (
+      <div className="ui container">
+        <GamesList games={this.state.games} />
+      </div>
+    )
+  }
+}
 
 export default App
