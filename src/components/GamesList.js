@@ -1,10 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import GameCard from './GameCard'
-import Message from './Message'
+import GameCard from './GameCard';
+import Message from './Message';
 
-const GamesList = ({ games }) => (
+const GamesList = ({ games, toggleFeatured }) => (
   <div className="ui four cards">
     {games.length === 0 ? (
       <Message
@@ -13,17 +13,20 @@ const GamesList = ({ games }) => (
         type="info | success | error"
       />
     ) : (
-      games.map(game => <GameCard game={game} key={game._id} />)
+      games.map(game => (
+        <GameCard game={game} key={game._id} toggleFeatured={toggleFeatured} />
+      ))
     )}
   </div>
-)
+);
 
 GamesList.propTypes = {
-  games: PropTypes.arrayOf(PropTypes.object).isRequired
-}
+  games: PropTypes.arrayOf(PropTypes.object).isRequired,
+  toggleFeatured: PropTypes.func.isRequired
+};
 
 GamesList.defaultProps = {
   games: []
-}
+};
 
-export default GamesList
+export default GamesList;
