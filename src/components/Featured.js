@@ -13,7 +13,7 @@ const Featured = ({ featured, toggleFeatured, gameId }) => (
     ) : (
       <a
         onClick={() => toggleFeatured(gameId)}
-        className="empty ui right corner label"
+        className="empty ui corner label"
       >
         <i className="star icon"></i>
       </a>

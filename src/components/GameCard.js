@@ -3,26 +3,39 @@ import PropTypes from 'prop-types';
 
 import Price from './Price';
 import Featured from './Featured';
+import GameDescription from './GameDescription';
 
-const GameCard = ({ game, toggleFeatured }) => (
+const GameCard = ({ game, toggleFeatured, toggleDescription }) => (
   <div className="ui card">
-    <div className="image">
-      <Price game={game} />
-      <Featured
-        featured={game.featured}
-        toggleFeatured={toggleFeatured}
-        gameId={game._id}
-      />
-      <img src={game.thumbnail} alt="Game cover" />
-    </div>
+    {!game.described ? (
+      <div className="image">
+        <Price game={game} />
+        <Featured
+          featured={game.featured}
+          toggleFeatured={toggleFeatured}
+          gameId={game._id}
+        />
+        <img src={game.thumbnail} alt="Game cover" />
+      </div>
+    ) : (
+      <div className="ui justified container description">
+        <p>{game.description}</p>
+      </div>
+    )}
     <div className="content">
       <a href="www.google.com" className="header">
         {game.name}
       </a>
-      <div className="meta">
-        <i className="icon users" /> {game.players}&nbsp;
-        <i className="icon wait" /> {game.duration} min.
-        <i className="ui icon eye" />
+      <div className="meta caption">
+        <div className="game__icon">
+          <i className="icon users" /> {game.players}&nbsp;
+          <i className="icon wait" /> {game.duration} min.
+        </div>
+        <GameDescription
+          described={game.described}
+          toggleDescription={toggleDescription}
+          gameId={game._id}
+        />
       </div>
     </div>
   </div>
