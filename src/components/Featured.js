@@ -5,6 +5,7 @@ const Featured = ({ featured, toggleFeatured, gameId }) => (
   <span>
     {featured ? (
       <a
+        href="#"
         onClick={() => toggleFeatured(gameId)}
         className="ui yellow corner label"
       >
@@ -12,6 +13,7 @@ const Featured = ({ featured, toggleFeatured, gameId }) => (
       </a>
     ) : (
       <a
+        href="#"
         onClick={() => toggleFeatured(gameId)}
         className="empty ui corner label"
       >

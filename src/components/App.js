@@ -1,7 +1,8 @@
 import React from 'react';
 import _orderBy from 'lodash/orderBy';
-import GamesList from './GamesList';
+
 import GameForm from './GameForm';
+import GamesList from './GamesList';
 
 import './App.css';
 
