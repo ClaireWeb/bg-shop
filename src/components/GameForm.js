@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ReactImageFallback from 'react-image-fallback';
 
-const tags = [
-  { _id: 1, name: 'dice' },
-  { _id: 2, name: 'economic' },
-  { _id: 3, name: 'family' }
-];
+// const tags = [
+//   { _id: 1, name: 'dice' },
+//   { _id: 2, name: 'economic' },
+//   { _id: 3, name: 'family' }
+// ];
 
-const genres = [
-  { _id: 1, name: 'abstract' },
-  { _id: 2, name: 'euro' },
-  { _id: 3, name: 'ameritrash' }
-];
+// const genres = [
+//   { _id: 1, name: 'abstract' },
+//   { _id: 2, name: 'euro' },
+//   { _id: 3, name: 'ameritrash' }
+// ];
 
 class GameForm extends Component {
   state = {
@@ -21,9 +22,10 @@ class GameForm extends Component {
     duration: 0,
     players: '',
     featured: false,
-    tags: [],
-    genre: 1,
-    publisher: 0
+    // tags: [],
+    // genre: 1,
+    publisher: 0,
+    thumbnail: ''
   };
 
   handleSubmit = e => {
@@ -42,39 +44,82 @@ class GameForm extends Component {
   handleCheckboxChange = e =>
     this.setState({ [e.target.name]: e.target.checked });
 
-  toggleTag = tag =>
-    this.state.tags.includes(tag._id)
-      ? this.setState({ tags: this.state.tags.filter(id => id !== tag._id) })
-      : this.setState({ tags: [...this.state.tags, tag._id] });
+  // toggleTag = tag =>
+  //   this.state.tags.includes(tag._id)
+  //     ? this.setState({ tags: this.state.tags.filter(id => id !== tag._id) })
+  //     : this.setState({ tags: [...this.state.tags, tag._id] });
 
-  handleGenreChange = genre => this.setState({ genre: genre._id });
+  // handleGenreChange = genre => this.setState({ genre: genre._id });
 
   render() {
-    const { name, description, price, duration, players } = this.state;
+    const {
+      name,
+      description,
+      price,
+      duration,
+      players,
+      thumbnail
+    } = this.state;
     return (
       <form className="ui form" onSubmit={this.handleSubmit}>
+        <div className="ui grid">
+          <div className="twelve wide column">
+            <div className="field">
+              <label htmlFor="name">Game Title</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Full game title"
+                value={name}
+                onChange={this.handleChange}
+              />
+            </div>
+
+            <div className="field">
+              <label htmlFor="description">Game Description</label>
+              <textarea
+                type="text"
+                id="description"
+                name="description"
+                placeholder="Game description"
+                value={description}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="four wide column">
+            {/* {thumbnail ? (
+              <img src={thumbnail} alt="Thumbnail" className="ui image" />
+            ) : (
+              <img
+                src="http://via.placeholder.com/250x250"
+                alt="Thumbnail"
+                className="ui image"
+              />
+            )} */}
+            <ReactImageFallback
+              src={thumbnail}
+              fallbackImage="http://via.placeholder.com/250x250"
+              alt="Thumbnail"
+              className="ui image"
+            />
+          </div>
+        </div>
+
         <div className="field">
-          <label htmlFor="name">Game Title</label>
+          <label htmlFor="thumbnail">Thumbnail</label>
           <input
             type="text"
-            id="name"
-            name="name"
-            placeholder="Full game title"
-            value={name}
+            id="thumbnail"
+            name="thumbnail"
+            placeholder="Image URL"
+            value={thumbnail}
             onChange={this.handleChange}
           />
         </div>
-        <div className="field">
-          <label htmlFor="description">Game Description</label>
-          <textarea
-            type="text"
-            id="description"
-            name="description"
-            placeholder="Game description"
-            value={description}
-            onChange={this.handleChange}
-          />
-        </div>
+
         <div className="three fields">
           <div className="field">
             <label htmlFor="price">Price (in cents)</label>
@@ -86,6 +131,7 @@ class GameForm extends Component {
               onChange={this.handleChange}
             />
           </div>
+
           <div className="field">
             <label htmlFor="duration">Duration (in minutes)</label>
             <input
@@ -118,7 +164,7 @@ class GameForm extends Component {
           <label htmlFor="featured">Featured?</label>
         </div>
 
-        <div className="field">
+        {/* <div className="field">
           <label>Tags</label>
           {tags.map(tag => (
             <div key={tag._id} className="inline field">
@@ -146,7 +192,7 @@ class GameForm extends Component {
               <label htmlFor={`genre-${genre._id}`}>{genre.name}</label>
             </div>
           ))}
-        </div>
+        </div> */}
 
         <div className="field">
           <label>Publishers</label>
