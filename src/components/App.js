@@ -6,9 +6,21 @@ import GamesList from './GamesList';
 
 import './App.css';
 
+const publishers = [
+  {
+    _id: 1,
+    name: 'Days of Wonder'
+  },
+  {
+    _id: 2,
+    name: 'Rio Grande Games'
+  }
+];
+
 const games = [
   {
     _id: 1,
+    publisher: 1,
     featured: true,
     described: false,
     name: 'Quadropolis',
@@ -22,6 +34,7 @@ const games = [
   },
   {
     _id: 2,
+    publisher: 1,
     featured: false,
     described: false,
     name: 'Five Tribes',
@@ -35,6 +48,7 @@ const games = [
   },
   {
     _id: 3,
+    publisher: 2,
     featured: false,
     described: false,
     name: 'Roll for the Galaxy',
@@ -80,12 +94,13 @@ class App extends React.Component {
     });
 
   render() {
+    const { games } = this.state;
     return (
       <div className="ui container">
-        <GameForm />
+        <GameForm publishers={publishers} />
         <br />
         <GamesList
-          games={this.state.games}
+          games={games}
           toggleFeatured={this.toggleFeatured}
           toggleDescription={this.toggleDescription}
         />
