@@ -31,11 +31,6 @@ const GameCard = ({ game, toggleFeatured, toggleDescription }) => (
           <i className="icon users" /> {game.players}&nbsp;
           <i className="icon wait" /> {game.duration} min.
         </div>
-        <GameDescription
-          described={game.described}
-          toggleDescription={toggleDescription}
-          gameId={game._id}
-        />
       </div>
     </div>
   </div>

@@ -4,6 +4,8 @@ import _orderBy from 'lodash/orderBy';
 import GameForm from './GameForm';
 import GamesList from './GamesList';
 import TopNavigation from './TopNavigation';
+import SignUp from './SignUp';
+import Login from './Login';
 
 import './App.css';
 
@@ -120,6 +122,9 @@ class App extends React.Component {
             />
           </div>
         </div>
+
+        <Login />
+        <SignUp />
 
         <br />
       </div>
