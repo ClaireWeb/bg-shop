@@ -128,6 +128,11 @@ class App extends React.Component {
       showGameForm: false
     });
 
+  deleteGame = game =>
+    this.setState({
+      games: this.state.games.filter(item => item._id !== game._id)
+    });
+
   render() {
     const { games, showGameForm } = this.state;
     const numberOfColumns = showGameForm ? 'ten' : 'sixteen';
@@ -152,6 +157,7 @@ class App extends React.Component {
               toggleFeatured={this.toggleFeatured}
               toggleDescription={this.toggleDescription}
               editGame={this.selectGameForEditing}
+              deleteGame={this.deleteGame}
             />
           </div>
         </div>
