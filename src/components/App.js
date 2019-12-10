@@ -105,6 +105,8 @@ class App extends React.Component {
   selectGameForEditing = game =>
     this.setState({ selectedGame: game, showGameForm: true });
 
+  saveGame = game => (game._id ? this.updateGame(game) : this.addGame(game));
+
   addGame = game =>
     this.setState({
       games: this.sortGames([
@@ -115,6 +117,14 @@ class App extends React.Component {
           _id: this.state.games.length + 1
         }
       ]),
+      showGameForm: false
+    });
+
+  updateGame = game =>
+    this.setState({
+      games: this.sortGames(
+        this.state.games.map(item => (item._id === game._id ? game : item))
+      ),
       showGameForm: false
     });
 
@@ -131,7 +141,7 @@ class App extends React.Component {
               <GameForm
                 publishers={publishers}
                 cancel={this.hideGameForm}
-                submit={this.addGame}
+                submit={this.saveGame}
                 game={this.state.selectedGame}
               />
             </div>
