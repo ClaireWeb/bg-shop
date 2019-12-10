@@ -40,7 +40,7 @@ class GameForm extends Component {
 
     // Check si l'objet est vide, pas d'erreur donc les datas sont valides
     if (Object.keys(errors).length === 0) {
-      console.log(this.state.data);
+      this.props.submit(this.state.data);
     }
   };
 
@@ -201,7 +201,8 @@ GameForm.propTypes = {
       name: PropTypes.string.isRequired
     })
   ).isRequired,
-  cancel: PropTypes.func.isRequired
+  cancel: PropTypes.func.isRequired,
+  submit: PropTypes.func.isRequired
 };
 
 GameForm.defaultProps = {
