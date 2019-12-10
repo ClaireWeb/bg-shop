@@ -69,7 +69,8 @@ const games = [
 class App extends React.Component {
   state = {
     games: [],
-    showGameForm: false
+    showGameForm: false,
+    selectedGame: {}
   };
 
   componentDidMount() {
@@ -101,6 +102,9 @@ class App extends React.Component {
   showGameForm = () => this.setState({ showGameForm: true });
   hideGameForm = () => this.setState({ showGameForm: false });
 
+  selectGameForEditing = game =>
+    this.setState({ selectedGame: game, showGameForm: true });
+
   addGame = game =>
     this.setState({
       games: this.sortGames([
@@ -128,6 +132,7 @@ class App extends React.Component {
                 publishers={publishers}
                 cancel={this.hideGameForm}
                 submit={this.addGame}
+                game={this.state.selectedGame}
               />
             </div>
           )}
@@ -136,6 +141,7 @@ class App extends React.Component {
               games={games}
               toggleFeatured={this.toggleFeatured}
               toggleDescription={this.toggleDescription}
+              editGame={this.selectGameForEditing}
             />
           </div>
         </div>

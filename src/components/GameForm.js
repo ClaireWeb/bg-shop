@@ -6,6 +6,7 @@ import FormInlineMessage from './FormInlineMessage';
 class GameForm extends Component {
   state = {
     data: {
+      _id: null,
       name: '',
       description: '',
       price: 0,
@@ -17,6 +18,12 @@ class GameForm extends Component {
     },
     errors: {}
   };
+
+  componentDidMount() {
+    if (this.props.game._id) {
+      this.setState({ data: this.props.game });
+    }
+  }
 
   // Pas une arrow fonction parce qu'on n'aura pas besoin d'accéder à cette variable ici
   validate(data) {
@@ -202,7 +209,14 @@ GameForm.propTypes = {
     })
   ).isRequired,
   cancel: PropTypes.func.isRequired,
-  submit: PropTypes.func.isRequired
+  submit: PropTypes.func.isRequired,
+  game: PropTypes.shape({
+    name: PropTypes.string,
+    thumbnail: PropTypes.string,
+    players: PropTypes.string,
+    featured: PropTypes.bool,
+    duration: PropTypes.number
+  }).isRequired
 };
 
 GameForm.defaultProps = {
