@@ -4,14 +4,13 @@ import ReactImageFallback from 'react-image-fallback';
 import FormInlineMessage from './FormInlineMessage';
 
 const initialData = {
-  _id: null,
   name: '',
   description: '',
   price: 0,
   duration: 0,
   players: '',
   featured: false,
-  publisher: 0,
+  publisher: '0',
   thumbnail: ''
 };
 
@@ -215,13 +214,14 @@ class GameForm extends Component {
 GameForm.propTypes = {
   publishers: PropTypes.arrayOf(
     PropTypes.shape({
-      _id: PropTypes.number.isRequired,
+      _id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired
     })
   ).isRequired,
   cancel: PropTypes.func.isRequired,
   submit: PropTypes.func.isRequired,
   game: PropTypes.shape({
+    _id: PropTypes.string,
     name: PropTypes.string,
     thumbnail: PropTypes.string,
     players: PropTypes.string,

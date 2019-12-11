@@ -4,19 +4,17 @@ import _orderBy from 'lodash/orderBy';
 import GameForm from './GameForm';
 import GamesList from './GamesList';
 import TopNavigation from './TopNavigation';
-import Login from './Login';
-import SignUp from './SignUp';
 import api from '../api';
 
 import './App.css';
 
 const publishers = [
   {
-    _id: 1,
+    _id: '1',
     name: 'Days of Wonder'
   },
   {
-    _id: 2,
+    _id: '2',
     name: 'Rio Grande Games'
   }
 ];
@@ -108,18 +106,13 @@ class App extends React.Component {
 
   saveGame = game => (game._id ? this.updateGame(game) : this.addGame(game));
 
-  addGame = game =>
-    this.setState({
-      games: this.sortGames([
-        ...this.state.games,
-        {
-          ...game,
-          // inutile si on envoie au serveur (BDD auto-incremente l'id)
-          _id: this.state.games.length + 1
-        }
-      ]),
-      showGameForm: false
-    });
+  addGame = gameData =>
+    api.games.create(gameData).then(game =>
+      this.setState({
+        games: this.sortGames([...this.state.games, game]),
+        showGameForm: false
+      })
+    );
 
   updateGame = game =>
     this.setState({
@@ -162,9 +155,6 @@ class App extends React.Component {
             />
           </div>
         </div>
-
-        <Login />
-        <SignUp />
 
         <br />
       </div>
