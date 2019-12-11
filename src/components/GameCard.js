@@ -39,9 +39,7 @@ class GameCard extends React.Component {
           </div>
         )}
         <div className="content">
-          <a href="www.google.com" className="header">
-            {game.name}
-          </a>
+          <a className="header">{game.name}</a>
           <div className="meta caption">
             <div className="game__icon">
               <i className="icon users" /> {game.players}&nbsp;
