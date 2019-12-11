@@ -19,7 +19,8 @@ class GameForm extends Component {
   state = {
     data: initialData,
     errors: {},
-    loading: false
+    loading: false,
+    redirect: false
   };
 
   componentDidMount() {
