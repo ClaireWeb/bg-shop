@@ -13,7 +13,7 @@ class App extends React.Component {
         <TopNavigation />
         <Route exact path="/" component={HomePage} />
         <Route path="/games" component={GamesPage} />
-        <Route path="/game/:_id" component={ShowGamePage} />
+        <Route path="/game/:_id" exact component={ShowGamePage} />
       </div>
     );
   }
