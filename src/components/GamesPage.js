@@ -139,7 +139,7 @@ class GamesPage extends React.Component {
     );
 
   render() {
-    const { games, showGameForm, loading } = this.state;
+    const { games, loading } = this.state;
     const numberOfColumns =
       this.props.location.pathname === '/games' ? 'sixteen' : 'ten';
     return (

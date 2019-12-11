@@ -4,21 +4,19 @@ const GameDescription = ({ described, toggleDescription, gameId }) => {
   return (
     <span>
       {!described ? (
-        <a
-          href="#"
+        <button
           onClick={() => toggleDescription(gameId)}
           className="text__icon"
         >
           <i className="ui grey icon eye" />
-        </a>
+        </button>
       ) : (
-        <a
-          href="#"
+        <button
           onClick={() => toggleDescription(gameId)}
           className="text__icon"
         >
           <i className="ui green icon eye" />
-        </a>
+        </button>
       )}
     </span>
   );
