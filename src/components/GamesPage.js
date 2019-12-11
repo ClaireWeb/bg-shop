@@ -1,7 +1,7 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
 import _orderBy from 'lodash/orderBy';
 import _find from 'lodash/find';
+import { Route } from 'react-router-dom';
 
 import GameForm from './GameForm';
 import GamesList from './GamesList';
@@ -70,7 +70,6 @@ const publishers = [
 class GamesPage extends React.Component {
   state = {
     games: [],
-    selectedGame: {},
     loading: true
   };
 
@@ -107,9 +106,6 @@ class GamesPage extends React.Component {
         gameId === game._id ? { ...game, described: !game.described } : game
       )
     });
-
-  selectGameForEditing = game =>
-    this.setState({ selectedGame: game, showGameForm: true });
 
   saveGame = game => (game._id ? this.updateGame(game) : this.addGame(game));
 
@@ -157,6 +153,22 @@ class GamesPage extends React.Component {
               </div>
             )}
           />
+          <Route
+            path="/games/edit/:_id"
+            render={props => (
+              <div className="six wide column">
+                <GameForm
+                  publishers={publishers}
+                  submit={this.saveGame}
+                  game={
+                    _find(this.state.games, {
+                      _id: props.match.params._id
+                    }) || {}
+                  }
+                />
+              </div>
+            )}
+          />
 
           <div className={`${numberOfColumns} wide column`}>
             {loading ? (
@@ -166,7 +178,6 @@ class GamesPage extends React.Component {
                 games={games}
                 toggleFeatured={this.toggleFeatured}
                 toggleDescription={this.toggleDescription}
-                editGame={this.selectGameForEditing}
                 deleteGame={this.deleteGame}
               />
             )}
