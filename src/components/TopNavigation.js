@@ -1,14 +1,19 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const TopNavigation = ({ showGameForm }) => (
   <div className="ui secondary pointing menu">
-    <a href="/" className="item">
+    <NavLink exact to="/" className="item">
       BGShop
-    </a>
-    <a className="item" onClick={showGameForm}>
-      <i className="icon plus"></i>Add New Game
-    </a>
+    </NavLink>
+    <NavLink exact to="/games" className="item">
+      Games
+    </NavLink>
+    <NavLink exact to="/games/new" className="item">
+      <i className="icon plus" />
+      Add New Game
+    </NavLink>
   </div>
 );
 
