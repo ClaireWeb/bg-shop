@@ -2,6 +2,8 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import HomePage from './HomePage';
 import TopNavigation from './TopNavigation';
+import GamesPage from './GamesPage';
+import ShowGamePage from './ShowGamePage';
 
 class App extends React.Component {
   state = {};
@@ -10,6 +12,8 @@ class App extends React.Component {
       <div className="ui container">
         <TopNavigation />
         <Route exact path="/" component={HomePage} />
+        <Route path="/games" component={GamesPage} />
+        <Route path="/game/:_id" component={ShowGamePage} />
       </div>
     );
   }

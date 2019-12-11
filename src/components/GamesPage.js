@@ -4,7 +4,7 @@ import _find from 'lodash/find';
 
 import GameForm from './GameForm';
 import GamesList from './GamesList';
-import TopNavigation from './TopNavigation';
+import LoadingMsg from './LoadingMsg';
 import api from '../api';
 
 import './App.css';
@@ -146,8 +146,6 @@ class GamesPage extends React.Component {
     const numberOfColumns = showGameForm ? 'ten' : 'sixteen';
     return (
       <div className="ui container">
-        <TopNavigation showGameForm={this.showGameForm} />
-
         <div className="ui stackable grid">
           {showGameForm && (
             <div className="six wide column">
@@ -161,13 +159,7 @@ class GamesPage extends React.Component {
           )}
           <div className={`${numberOfColumns} wide column`}>
             {loading ? (
-              <div className="ui icon message">
-                <i className="notched circle loading icon"></i>
-                <div className="content">
-                  <div className="header">Wait a second</div>
-                  <p>Loading game collection...</p>
-                </div>
-              </div>
+              <LoadingMsg />
             ) : (
               <GamesList
                 games={games}
