@@ -6,11 +6,21 @@ import GamesPage from './GamesPage';
 import ShowGamePage from './ShowGamePage';
 
 class App extends React.Component {
-  state = {};
+  state = {
+    user: {
+      token: 'dummy'
+    }
+  };
+
+  logout = () => this.setState({ user: { token: null } });
+
   render() {
     return (
       <div className="ui container">
-        <TopNavigation />
+        <TopNavigation
+          isAuthenticated={!!this.state.user.token}
+          logout={this.logout}
+        />
         <Route exact path="/" component={HomePage} />
         <Route path="/games" component={GamesPage} />
         <Route path="/game/:_id" exact component={ShowGamePage} />
