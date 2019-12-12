@@ -62,7 +62,10 @@ class App extends React.Component {
         )}
 
         <Route exact path="/" component={HomePage} />
-        <Route path="/games" component={GamesPage} />
+        <Route
+          path="/games"
+          render={props => <GamesPage {...props} user={this.state.user} />}
+        />
         <Route
           path="/signup"
           render={props => (
