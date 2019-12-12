@@ -1,5 +1,6 @@
 import React from 'react';
 import LoginForm from './LoginForm';
+import PropTypes from 'prop-types';
 import api from '../api';
 
 class LoginPage extends React.Component {
@@ -8,7 +9,11 @@ class LoginPage extends React.Component {
     password: ''
   };
 
-  submit = data => api.users.login(data).then(token => console.log(token));
+  submit = data =>
+    api.users.login(data).then(token => {
+      this.props.login(token);
+      this.props.history.push('/games');
+    });
 
   render() {
     return (
@@ -18,5 +23,9 @@ class LoginPage extends React.Component {
     );
   }
 }
+
+LoginPage.propTypes = {
+  login: PropTypes.func.isRequired
+};
 
 export default LoginPage;
