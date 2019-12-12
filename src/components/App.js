@@ -5,6 +5,7 @@ import TopNavigation from './TopNavigation';
 import GamesPage from './GamesPage';
 import ShowGamePage from './ShowGamePage';
 import SignupPage from './SignupPage';
+import LoginPage from './LoginPage';
 
 class App extends React.Component {
   state = {
@@ -41,6 +42,7 @@ class App extends React.Component {
             <SignupPage {...props} setMessage={this.setMessage} />
           )}
         />
+        <Route path="/login" component={LoginPage} />
         <Route path="/game/:_id" exact component={ShowGamePage} />
       </div>
     );
