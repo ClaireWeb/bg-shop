@@ -9,7 +9,7 @@ class SignupForm extends React.Component {
     data: {
       email: '',
       password: '',
-      passwordConf: ''
+      passwordConfirmation: ''
     },
     loading: false,
     errors: {}
@@ -40,7 +40,7 @@ class SignupForm extends React.Component {
       errors.email = 'You provided invalid email address';
     if (!data.email) errors.email = "This field can't be blank";
     if (!data.password) errors.password = "This field can't be blank";
-    if (data.passwordConf !== data.password)
+    if (data.passwordConfirmation !== data.password)
       errors.password = 'Passwords must match';
     return errors;
   };
@@ -76,17 +76,20 @@ class SignupForm extends React.Component {
           <FormInlineMessage content={errors.password} type="error" />
         </div>
 
-        <div className={errors.passwordConf ? 'field error' : 'field'}>
-          <label htmlFor="passwordConf">Confirm Password</label>
+        <div className={errors.passwordConfirmation ? 'field error' : 'field'}>
+          <label htmlFor="passwordConfirmation">Confirm Password</label>
           <input
             type="password"
-            id="passordConf"
-            name="passwordConf"
+            id="passordConfirmation"
+            name="passwordConfirmation"
             placeholder="Type it again, just to make sure"
-            value={data.passwordConf}
+            value={data.passwordConfirmation}
             onChange={this.handleStringChange}
           />
-          <FormInlineMessage content={errors.passwordConf} type="error" />
+          <FormInlineMessage
+            content={errors.passwordConfirmation}
+            type="error"
+          />
         </div>
 
         <div className="ui fluid buttons">
