@@ -8,7 +8,8 @@ const GamesList = ({
   games,
   toggleFeatured,
   toggleDescription,
-  deleteGame
+  deleteGame,
+  user
 }) => (
   <div className="ui four cards">
     {games.length === 0 ? (
@@ -25,6 +26,7 @@ const GamesList = ({
           toggleFeatured={toggleFeatured}
           toggleDescription={toggleDescription}
           deleteGame={deleteGame}
+          user={user}
         />
       ))
     )}
@@ -35,7 +37,11 @@ GamesList.propTypes = {
   games: PropTypes.arrayOf(PropTypes.object).isRequired,
   toggleFeatured: PropTypes.func.isRequired,
   toggleDescription: PropTypes.func.isRequired,
-  deleteGame: PropTypes.func.isRequired
+  deleteGame: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    token: PropTypes.string,
+    role: PropTypes.string.isRequired
+  }).isRequired
 };
 
 GamesList.defaultProps = {

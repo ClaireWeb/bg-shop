@@ -185,6 +185,7 @@ class GamesPage extends React.Component {
                 toggleFeatured={this.toggleFeatured}
                 toggleDescription={this.toggleDescription}
                 deleteGame={this.deleteGame}
+                user={this.props.user}
               />
             )}
           </div>

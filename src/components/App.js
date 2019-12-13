@@ -53,6 +53,7 @@ class App extends React.Component {
         <TopNavigation
           isAuthenticated={!!this.state.user.token}
           logout={this.logout}
+          isAdmin={!!this.state.user.token && this.state.user.role === 'admin'}
         />
 
         {this.state.message && (
