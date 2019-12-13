@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import ReactImageFallback from 'react-image-fallback';
 import FormInlineMessage from './FormInlineMessage';
 
 const initialData = {
-  _id: null,
   name: '',
   description: '',
   price: 0,
   duration: 0,
   players: '',
   featured: false,
-  publisher: 0,
+  publisher: '0',
   thumbnail: ''
 };
 
 class GameForm extends Component {
   state = {
     data: initialData,
-    errors: {}
+    errors: {},
+    loading: false,
+    redirect: false
   };
 
   componentDidMount() {
@@ -53,12 +55,18 @@ class GameForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const errors = this.validate(this.state.data);
+    //const errors = this.validate(this.state.data);
+    const errors = {};
     this.setState({ errors });
 
     // Check si l'objet est vide, pas d'erreur donc les datas sont valides
     if (Object.keys(errors).length === 0) {
-      this.props.submit(this.state.data);
+      this.setState({ loading: true });
+      this.props
+        .submit(this.state.data)
+        .catch(err =>
+          this.setState({ errors: err.response.data.errors, loading: false })
+        );
     }
   };
 
@@ -79,9 +87,10 @@ class GameForm extends Component {
     });
 
   render() {
-    const { data, errors } = this.state;
+    const { data, errors, loading } = this.state;
+    const formClassNames = loading ? 'ui form loading' : 'ui form';
     return (
-      <form className="ui form" onSubmit={this.handleSubmit}>
+      <form className={formClassNames} onSubmit={this.handleSubmit}>
         <div className="ui grid">
           <div className="twelve wide column">
             <div className={errors.name ? 'field error' : 'field'}>
@@ -203,9 +212,9 @@ class GameForm extends Component {
             Create
           </button>
           <div className="or"></div>
-          <a className="ui button" onClick={this.props.cancel}>
+          <Link to="/games" className="ui button">
             Cancel
-          </a>
+          </Link>
         </div>
       </form>
     );
@@ -215,13 +224,13 @@ class GameForm extends Component {
 GameForm.propTypes = {
   publishers: PropTypes.arrayOf(
     PropTypes.shape({
-      _id: PropTypes.number.isRequired,
+      _id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired
     })
   ).isRequired,
-  cancel: PropTypes.func.isRequired,
   submit: PropTypes.func.isRequired,
   game: PropTypes.shape({
+    _id: PropTypes.string,
     name: PropTypes.string,
     thumbnail: PropTypes.string,
     players: PropTypes.string,

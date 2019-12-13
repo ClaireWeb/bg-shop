@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import Price from './Price';
 import Featured from './Featured';
@@ -18,9 +19,50 @@ class GameCard extends React.Component {
       game,
       toggleFeatured,
       toggleDescription,
-      editGame,
-      deleteGame
+      deleteGame,
+      user
     } = this.props;
+    const adminActions = (
+      <div className="extra content">
+        {this.state.showConfirmation ? (
+          <div className="ui two buttons">
+            <button
+              className="ui red basic button"
+              onClick={() => deleteGame(game)}
+            >
+              <i className="ui icon check" /> YES
+            </button>
+            <button
+              className="ui grey basic button"
+              onClick={this.hideConfirmation}
+            >
+              <i className="ui icon close" /> NO
+            </button>
+          </div>
+        ) : (
+          <div className="ui two buttons">
+            <Link
+              to={`/games/edit/${game._id}`}
+              className="ui green basic button"
+            >
+              <i className="ui icon edit"></i>
+            </Link>
+            <button
+              className="ui red basic button"
+              onClick={this.showConfirmation}
+            >
+              <i className="ui icon trash"></i>
+            </button>
+          </div>
+        )}
+      </div>
+    );
+    const addToCart = (
+      <div className="extra content">
+        <button className="ui green basic button">Add to Cart</button>
+      </div>
+    );
+
     return (
       <div className="ui card">
         {!game.described ? (
@@ -39,7 +81,9 @@ class GameCard extends React.Component {
           </div>
         )}
         <div className="content">
-          <a className="header">{game.name}</a>
+          <Link to={`/game/${game._id}`} className="header">
+            {game.name}
+          </Link>
           <div className="meta caption">
             <div className="game__icon">
               <i className="icon users" /> {game.players}&nbsp;
@@ -51,41 +95,9 @@ class GameCard extends React.Component {
               gameId={game._id}
             />
           </div>
-
-          <div className="extra content">
-            {this.state.showConfirmation ? (
-              <div className="ui two buttons">
-                <a
-                  className="ui red basic button"
-                  onClick={() => deleteGame(game)}
-                >
-                  <i className="ui icon check" /> YES
-                </a>
-                <a
-                  className="ui grey basic button"
-                  onClick={this.hideConfirmation}
-                >
-                  <i className="ui icon close" /> NO
-                </a>
-              </div>
-            ) : (
-              <div className="ui two buttons">
-                <a
-                  className="ui green basic button"
-                  onClick={() => editGame(game)}
-                >
-                  <i className="ui icon edit"></i>
-                </a>
-                <a
-                  className="ui red basic button"
-                  onClick={this.showConfirmation}
-                >
-                  <i className="ui icon trash"></i>
-                </a>
-              </div>
-            )}
-          </div>
         </div>
+        {user.token && user.role === 'user' && addToCart}
+        {user.token && user.role === 'admin' && adminActions}
       </div>
     );
   }
@@ -101,8 +113,11 @@ GameCard.propTypes = {
     featured: PropTypes.bool.isRequired
   }).isRequired,
   toggleFeatured: PropTypes.func.isRequired,
-  editGame: PropTypes.func.isRequired,
-  deleteGame: PropTypes.func.isRequired
+  deleteGame: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    token: PropTypes.string,
+    role: PropTypes.string.isRequired
+  }).isRequired
 };
 
 export default GameCard;
