@@ -161,6 +161,7 @@ class GamesPage extends React.Component {
           />
           <AdminRoute
             path="/games/edit/:_id"
+            user={this.props.user}
             render={props => (
               <div className="six wide column">
                 <GameForm
