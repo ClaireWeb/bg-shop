@@ -2,10 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
+import logo from '../logo.png';
+
 const TopNavigation = ({ isAuthenticated, logout, isAdmin }) => (
-  <div className="ui secondary pointing menu">
+  <div className="ui stackable secondary pointing menu">
     <NavLink exact to="/" className="item">
-      BGShop
+      <div className="ui medium image">
+        <img src={logo} alt="Logo" />
+      </div>
     </NavLink>
     <NavLink exact to="/games" className="item">
       Games

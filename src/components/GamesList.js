@@ -11,13 +11,9 @@ const GamesList = ({
   deleteGame,
   user
 }) => (
-  <div className="ui four cards">
+  <div className="ui stackable grid three cards">
     {games.length === 0 ? (
-      <Message
-        header="header"
-        content="message"
-        type="info | success | error"
-      />
+      <Message header="header" content="message" />
     ) : (
       games.map(game => (
         <GameCard
